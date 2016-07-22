@@ -19,9 +19,16 @@ var compChoices = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"];
 
 	var someoneWon = false;
 
+function onePlayer() {
+	numPlayers = 1;
+}
+
 function twoPlayers() {
 	numPlayers = 2;
 }
+
+
+
 
 function markSquare(square) {
 	if (someoneWon) {
@@ -32,23 +39,15 @@ function markSquare(square) {
 
 		if (whosTurn === 1) {
 			square.innerHTML = "X";
+
 			whosTurn = 2;
 			player1.push(square.id);
 			checkWin(player1, 1);
+			if (numPlayers === 1) {
+				computerTurn();
+			}
 		}
-		else if (numPlayers === 2) {
-			var compPick = Math.floor(Math.random() * 8);
-			var compChoice = compChoices[compPick];
-			var element = document.getElementById(compChoice);
-				if (element.innerHTML === "-") {
-					element.innerHTML = "O";
-					whosTurn = 1;
-					player2.push(element);
-					checkWin(player2, 2);
-
-				}
-
-		}
+		
 
 		
 		else {
@@ -63,6 +62,25 @@ function markSquare(square) {
 	else {
 			console.log("Something's already there! No cheating");
 	}
+}
+
+function computerTurn() {
+	// var compChoices = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"];
+	 for (var i = 0; i < compChoices.length; i++) {
+var compPick = Math.floor(Math.random() * 8);
+			var compChoice = compChoices[compPick];
+			var element = document.getElementById(compChoice);
+		
+				 	if (element.innerHTML === "-") {
+				 		element.innerHTML = "O";
+				 		whosTurn = 1;
+				 		player2.push(element);
+				 		checkWin(player2, 2);
+				 		break;
+				 	}
+				 	
+	}
+				 
 }
 
 function checkWin(currentPlayersSquares, whoJustMarked) {

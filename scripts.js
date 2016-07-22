@@ -1,27 +1,33 @@
 
+// N GRID VERSION
 var whosTurn = 1; //start off on player 1's turn
-var numPlayers = 0;
+var numPlayers = 2;
 
-var winners = [
-	["A1", "A2", "A3"], //ROW 1
-	["B1", "B2", "B3"],	//ROW 2
-	["C1", "C2", "C3"],	//ROW 3
-	["A1", "B2", "C3"],	//DIAG 1
-	["A1", "B1", "C1"], // COL 1
-	["A2", "B2", "C2"], // COL 2
-	["A3", "B3", "C3"],	//COL 3
-	["A3", "B2", "C1"]	//OTHER DIAG
-	];
-var compChoices = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"];
+var winners = []
+// 1.Build a winners array 
+// 2.We need to populate the board
+
 
 	var player1 = []; // Array where we will stash the squares player1 has checked
 	var player2 = []; // Array where we will stash the squares player2 has checked
 
 	var someoneWon = false;
 
-function twoPlayers() {
-	numPlayers = 2;
-}
+// function compIsPlayer() {
+// 	numPlayers = 1;
+// }
+// function compTurn() {
+// 				var compPick = Math.floor(Math.random() * 8);
+// 				var compChoice = compChoices[compPick];
+// 				var element = document.getElementById(compChoice);
+// 					if (element.innerHTML === "-") {
+// 						element.innerHTML = "O";
+// 						whosTurn = 1;
+// 						player2.push(element);
+// 						checkWin(player2, 2);
+
+// 				}
+// 			}
 
 function markSquare(square) {
 	if (someoneWon) {
@@ -30,40 +36,57 @@ function markSquare(square) {
 	//Check to see if this square is in either player array. If so, goodbye
 	else if ((player1.indexOf(square.id) === -1) && (player2.indexOf(square.id) === -1)) { // -1 for each search means it's in neither array
 
-		if (whosTurn === 1) {
-			square.innerHTML = "X";
-			whosTurn = 2;
-			player1.push(square.id);
-			checkWin(player1, 1);
-		}
-		else if (numPlayers === 2) {
-			var compPick = Math.floor(Math.random() * 8);
-			var compChoice = compChoices[compPick];
-			var element = document.getElementById(compChoice);
-				if (element.innerHTML === "-") {
-					element.innerHTML = "O";
-					whosTurn = 1;
-					player2.push(element);
-					checkWin(player2, 2);
+		if (numPlayers === 2) {
 
-				}
-
-		}
-
+			if (whosTurn === 1) {
+				square.innerHTML = "X";
+				whosTurn = 2;
+				player1.push(square.id);
+				checkWin(player1, 1);
+			}
 		
-		else {
-			square.innerHTML = "O";
-			whosTurn = 1;
-			player2.push(square.id);
-			checkWin(player2, 2);
-		}
+			else {
+				square.innerHTML = "O";
+				whosTurn = 1;
+				player2.push(square.id);
+				checkWin(player2, 2);
+			}
 		
+		}
+
+		// else if (numPlayers === 1) {
+		// 	if (whosTurn === 1) {
+		// 		square.innerHTML = "X";
+		// 		whosTurn = 2;
+		// 		player1.push(square.id);
+		// 		checkWin(player1, 1);
+		// 		compTurn();
+			
+		// 	}
+		// }
 	}
 
 	else {
 			console.log("Something's already there! No cheating");
 	}
 }
+ 
+ // function compTurn() {
+
+			
+	// 		var compPick = Math.floor(Math.random() * 8);
+	// 		var compChoice = compChoices[compPick];
+	// 		var element = document.getElementById(compChoice);
+	// 			if (element.innerHTML === "-") {
+	// 				element.innerHTML = "O";
+	// 				whosTurn = 1;
+	// 				player2.push(element);
+	// 				checkWin(player2, 2);
+
+	// 			}
+			
+	// 	}
+
 
 function checkWin(currentPlayersSquares, whoJustMarked) {
 
@@ -113,8 +136,10 @@ function resetGame(){
 		buttons[i].classList.remove("winner");
 	}
 		
-	
 }
+
+
+ 
 	
 
 
